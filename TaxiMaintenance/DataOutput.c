@@ -2,7 +2,7 @@
 
 /******
 Function:	dataOutput()
-Description:输出
+Description:输出信息
 Calls:		dataSort();
 Called By:	main();	
 ******/
@@ -13,25 +13,23 @@ void dataOutput(void)
 	int CntBrandTime = 1;
 
 	dataSort();
+
 	printf("Reminder\n");
 	printf("==================\n");
+	//TODO 以下三功能相近，但难以封装，可再尝试。
 	//print time maintenance
 	printf("\n* Time - related maintenance coming soon...\n");
 	while (j <= CntTimeMaintain)
 	{
-		while (strcmp(BrandTimeMaintain[i], BrandTimeMaintain[i+1]) == 0 && i < CntTimeMaintain)
-			/*(i < CntTimeMaintain)*/
+		while (BrandTimeMaintain[i + 1] && strcmp(BrandTimeMaintain[i], BrandTimeMaintain[i + 1]) == 0)
 		{
-			//if (strcmp(BrandTimeMaintain[i-1], BrandTimeMaintain[i]) == 0)
-			{
-				i++;
-				j = i - 1;
-				CntBrandTime++;
-			}
+			i++;
+			j = i;
+			CntBrandTime++;
 		}
-		printf("%s: %d (", BrandTimeMaintain[i], CntBrandTime);
-		while(CntBrandTime--)
-			printf("%s", NumTimeMaintain[i - CntBrandTime]);
+		printf("%s: %d (%s", BrandTimeMaintain[i], CntBrandTime, NumTimeMaintain[i - CntBrandTime + 1]);
+		while(--CntBrandTime)
+			printf(", %s", NumTimeMaintain[i - CntBrandTime + 1]);
 		printf(")\n");
 		i++;
 		j++;
@@ -39,19 +37,20 @@ void dataOutput(void)
 	}
 	i = 1;
 	j = 1;
+
 	//print distance maintenance
 	printf("\n* Distance-related maintenance coming soon...\n");
 	while (j <= CntDistanceMaintain)
 	{
-		while (BrandDistanceMaintain[i] == BrandDistanceMaintain[i + 1] && i < CntDistanceMaintain)
+		while (BrandDistanceMaintain[i + 1] && strcmp(BrandDistanceMaintain[i], BrandDistanceMaintain[i + 1]) == 0)
 		{
 			i++;
-			j = i - 1;
+			j = i;
 			CntBrandTime++;
 		}
-		printf("%s: %d (", BrandDistanceMaintain[i], CntBrandTime);
-		while (CntBrandTime--)
-			printf("%s", NumDistanceMaintain[i - CntBrandTime]);
+		printf("%s: %d (%s", BrandDistanceMaintain[i], CntBrandTime, NumDistanceMaintain[i - CntBrandTime + 1]);
+		while (--CntBrandTime)
+			printf(", %s", NumDistanceMaintain[i - CntBrandTime + 1]);
 		printf(")\n");
 		i++;
 		j++;
@@ -59,19 +58,20 @@ void dataOutput(void)
 	}
 	i = 1;
 	j = 1;
+
 	//print write-off maintenance
 	printf("\n* Write-off coming soon...\n");
 	while (j <= CntWriteOff)
 	{
-		while (BrandWriteOff[i] == BrandWriteOff[i + 1] && i < CntWriteOff)
+		while (BrandWriteOff[i + 1] && strcmp(BrandWriteOff[i], BrandWriteOff[i + 1]) == 0)
 		{
 			i++;
-			j = i - 1;
+			j = i;
 			CntBrandTime++;
 		}
-		printf("%s: %d (", BrandWriteOff[i], CntBrandTime);
-		while (CntBrandTime--)
-			printf("%s", NumWriteOff[i - CntBrandTime]);
+		printf("%s: %d (%s", BrandWriteOff[i], CntBrandTime, NumWriteOff[i - CntBrandTime + 1]);
+		while (--CntBrandTime)
+			printf(", %s", NumWriteOff[i - CntBrandTime + 1]);
 		printf(")\n");
 		i++;
 		j++;
@@ -79,19 +79,17 @@ void dataOutput(void)
 	}
 	i = 1;
 	j = 1;
-
-
 }
 
 /******
 Function:	dataSort()
-Description:数据排序
+Description:数据排序，小数组使用插入排序
 Calls:		insertSort();
 Called By:	dataOutput();
 ******/
 void dataSort(void)
 {
-	insertSort(BrandWriteOff, NumWriteOff, CntWriteOff);//小数组使用插入排序
+	insertSort(BrandWriteOff, NumWriteOff, CntWriteOff);
 	insertSort(BrandDistanceMaintain, NumDistanceMaintain, CntDistanceMaintain);
 	insertSort(BrandTimeMaintain, NumTimeMaintain, CntTimeMaintain);
 }

@@ -10,32 +10,26 @@ int WriteOff;
 int CntWriteOff;
 int CntDistanceMaintain;
 int CntTimeMaintain;
-char *BrandWriteOff[10];//报废车辆品牌指针数组
-char *BrandDistanceMaintain[10];//里程保养品牌指针数组
-char *BrandTimeMaintain[10];//定时保养品牌指针数组
-char *NumWriteOff[10];//报废车辆车号指针数组
-char *NumDistanceMaintain[10];//里程保养车号指针数组
-char *NumTimeMaintain[10];//定时保养车号指针数组
+char *BrandWriteOff[10];			//报废车辆品牌指针数组
+char *BrandDistanceMaintain[10];	//里程保养品牌指针数组
+char *BrandTimeMaintain[10];		//定时保养品牌指针数组
+char *NumWriteOff[10];				//报废车辆车号指针数组
+char *NumDistanceMaintain[10];		//里程保养车号指针数组
+char *NumTimeMaintain[10];			//定时保养车号指针数组
 
 /******
 Function:	dataAnalyse()
 Description:数据分析
 Calls:		getSubmitDate();
 Called By:	dataInput();
-Input:		
-Output:		
 Return:		void
 ******/
 void dataAnalyse(void)
 {
 	BigRepair = isBigRepair();
-	//printf("%d\n", BigRepair);
 	TimeMaintain = isTimeMaintain();
-	//printf("%d\n", TimeMaintain);
 	DistanceMaintain = isDistanceMaintain();
-	//printf("%d\n", DistanceMaintain);
 	WriteOff = isWriteOff();
-	//printf("%d\n", WriteOff);
 	if (WriteOff)
 	{
 		CntWriteOff++;
